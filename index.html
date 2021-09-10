@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <form id="myForm">
+            <h3>Form User</h3>
+            <label for="name">Name: </label><br><br>
+            <input id="name" v-model.trim="username" type="text" placeholder="My name"><br><br>
+            <p>Username: {{username}}</p>
+            <label for="password">Password: </label><br><br>
+            <input id="password" v-model="password" type="password" placeholder="must include 6 characters"><br><br>
+
+            <label for="email">Email: </label><br><br>
+            <input id="email" v-model="email" type="text" placeholder="example@gmail.com"><br><br>
+
+            <button v-on:click="checkInput">Submit</button>
+        </form>
+
+        <div id="checkboxes">
+            <input type="checkbox" id="jack" value="Jack" v-model="checkednames" />
+            <label for="jack">Jack</label>
+            <input type="checkbox" id="John" value="John" v-model="checkednames" />
+            <label for="john">John</label>
+            <input type="checkbox" id="mike" value="Mike" v-model="checkednames" />
+            <label for="mike">Mike</label>
+            <br />
+            <span>Checked names: {{ checkedNames }}</span>
+
+            <br><br>
+            <select>
+                <option v-for="whatever in options"
+                    v-bind:value="whatever.value"
+                >{{whatever.text}}</option>
+
+            </select>
+        </div>
+        
+        <script>
+            var form = new Vue({
+                el:"#myForm",
+                data:{
+                    username:'',
+                    password:'',
+                    email:'',
+                },
+                methods: {
+                    checkInput: function() {
+                        var str ='';
+                        if (this.username) {
+                            str = str + "username: " + this.username;
+                        }
+                        if (this.password) {
+                            str = str + "password: " + this.password;
+                        }
+                        if (this.email) {
+                            str = str + "email: " + this.email;
+                        }
+                        if (str) {
+                            alert(str)
+                        } else {
+                            alert("please input required information")
+                        }
+                    }
+
+
+                }
+
+
+            })
+
+            var app = new Vue({
+                el: "#checkboxes",
+                data: {
+                    checkedNames: [],
+                    options: [
+                        { text: 'One', value: 'A' },
+                        { text: 'Two', value: 'B' },
+                        { text: 'Three', value: 'C' }
+                    ],
+                    myselect: 'B',
+                }
+            })
+
+        </script>
+    </body>
+</html>
